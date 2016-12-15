@@ -48,6 +48,8 @@
         app.commandLine.appendSwitch("--simulate-touch-screen-with-mouse");
     }
 
+    app.setPath("userData", "/data/electron");
+
     /*
       we initialize our application display as a callback of the electronJS "ready" event
     */
@@ -80,7 +82,9 @@
             window.openDevTools();
         }
 
-        // the big red button, here we go
-        window.loadURL(electronConfig.URL_LAUNCHER_URL);
+        // TODO: remove the interval and implement a way of knowing when node-server is ready
+        setTimeout(function() {
+          window.loadURL(electronConfig.URL_LAUNCHER_URL);
+        },30000);
     });
 }
