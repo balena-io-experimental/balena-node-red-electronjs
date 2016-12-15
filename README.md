@@ -1,6 +1,6 @@
 # resin-node-red-electronjs
 
-a node-red application with [resin-supervisor](https://docs.resin.io/runtime/supervisor-api/) flow [support](https://github.com/resin-io-projects/node-red-contrib-resinio), can be managed via an attached screen and remotely via resin.io [publicURL](https://docs.resin.io/management/devices/#enable-public-device-url)
+a node-red application with [resin-supervisor](https://docs.resin.io/runtime/supervisor-api/) flow [support](https://github.com/resin-io-projects/node-red-contrib-resinio), can be managed via [ElectronJS](http://electron.atom.io/) on an attached screen and remotely via resin.io [publicURL](https://docs.resin.io/management/devices/#enable-public-device-url)
 
 ## [only for Raspberry Pi] Configure via [configuration variables](https://docs.resin.io/configuration/advanced/#modifying-config-txt-remotely-)
 Variable Name | Value | Description | Device-specific

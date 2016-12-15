@@ -47,9 +47,6 @@ WORKDIR /usr/src/app
 # Move package.json to filesystem
 COPY "$SOURCEFOLDER/app/package.json" ./
 
-# NPM i app
-RUN JOBS=MAX npm i --production
-
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
 RUN JOBS=MAX npm install -g node-red node-red-contrib-resinio && \
