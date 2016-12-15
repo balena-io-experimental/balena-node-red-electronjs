@@ -1,0 +1,34 @@
+{
+  "name": "resin-node-red-electronjs",
+  "version": "0.0.1",
+  "description": "electronJS-based resin + node-RED application",
+  "main": "main.js",
+  "scripts": {
+    "start": "NODE_ENV=production startx ./node_modules/electron/dist/electron .",
+    "test": "NODE_ENV=development startx ./node_modules/electron/dist/electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resin-io-playground/resin-node-red-electronjs.git"
+  },
+  "keywords": [
+    "resin",
+    "io",
+    "electron",
+    "js"
+  ],
+  "dependencies": {
+    "electron": "^1.4.7",
+    "require-rebuild": "^1.2.8"
+  },
+  "author": "Carlo Maria Curinga",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/resin-io-playground/resin-node-red-electronjs/issues"
+  },
+  "homepage": "https://github.com/resin-io-playground/resin-node-red-electronjs#readme",
+  "jshintConfig": {
+    "esnext": true,
+    "strict": true
+  }
+}

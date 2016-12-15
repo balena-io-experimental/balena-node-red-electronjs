@@ -1,0 +1,65 @@
+# base-image for node on any machine using a template variable,
+# see more about dockerfile templates here:http://docs.resin.io/pages/deployment/docker-templates
+# Note the node:slim image doesn't have node-gyp
+FROM resin/%%RESIN_MACHINE_NAME%%-node:6.9
+
+# Install apt deps
+RUN apt-get update && apt-get install -y \
+  apt-utils \
+  build-essential \
+  clang \
+  xserver-xorg-core \
+  xserver-xorg-input-all \
+  xserver-xorg-video-fbdev \
+  xorg \
+  libdbus-1-dev \
+  libgtk2.0-dev \
+  libnotify-dev \
+  libgnome-keyring-dev \
+  libgconf2-dev \
+  libasound2-dev \
+  libcap-dev \
+  libcups2-dev \
+  libxtst-dev \
+  libxss1 \
+  libnss3-dev \
+  fluxbox \
+  libsmbclient \
+  libssh-4 \
+  fbset \
+  libexpat-dev && rm -rf /var/lib/apt/lists/*
+
+# Set Xorg and FLUXBOX preferences
+RUN mkdir ~/.fluxbox
+RUN echo "xset s off" > /root/.fluxbox/startup && echo "xserver-command=X -s 0 dpms -nocursor" >> ~/.fluxbox/startup
+RUN echo "exec /usr/bin/startfluxbox" > /root/.xinitrc \
+
+# Set npm
+RUN npm config set unsafe-perm true
+
+# Save source folder
+RUN printf "%s\n" "${PWD##}" > SOURCEFOLDER
+
+# Defines our working directory in container
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app
+
+# Move package.json to filesystem
+COPY "$SOURCEFOLDER/app/package.json" ./
+
+# NPM i app
+RUN JOBS=MAX npm i --production
+
+# This install npm dependencies on the resin.io build server,
+# making sure to clean up the artifacts it creates in order to reduce the image size.
+RUN JOBS=MAX npm install -g node-red node-red-contrib-resinio && \
+  npm i --production && npm cache clean && rm -rf /tmp/*
+
+# This will copy all files in our root to the working  directory in the container
+COPY "$SOURCEFOLDER/app" ./
+
+# Enable systemd init system in container
+ENV INITSYSTEM=on
+
+# server.js will run when container starts up on the device
+CMD ["bash", "/usr/src/app/start.sh"]
