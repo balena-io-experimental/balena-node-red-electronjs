@@ -17,7 +17,7 @@ PORT | `80` | the port on which expose the Node-RED UI
 USERNAME | `none` | the Node-RED admin username
 PASSWORD | `none` | the Node-RED admin password [hash](https://nodered.org/docs/security#generating-the-password-hash)
 
-### ElectronJS config via ENV VARS
+### ElectronJS configuration via [environment variables](https://docs.resin.io/management/env-vars/)
 * **`URL_LAUNCHER_TITLE`** *string* - the title of the window. Seen only with `URL_LAUNCHER_FRAME`=`true` - *defaults to* `RESIN.IO`
 * **`URL_LAUNCHER_FRAME`** *bool* (converted from *string*) - set to "true" to display the window frame. Seen only with `URL_LAUNCHER_KIOSK`=`false` - *defaults to*  `0`
 * **`URL_LAUNCHER_CONSOLE`** *bool* (converted from *string*) - set to "true" to display the debug console -  *defaults to*  `0`
